@@ -2,6 +2,6 @@
 .idea/
 *.iws
 *.ipr
-
-
+WebRoot/WEB-INF/classes/
+classes/
 .DS_Store
