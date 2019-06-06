@@ -34,8 +34,8 @@ public class ManifestAnalyzeTask extends ApkTask {
 
     private static final String TAG = "Syswin.ManifestAnalyzeTask";
 
-    public ManifestAnalyzeTask(String params) {
-        super(params);
+    public ManifestAnalyzeTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_MANIFEST;
     }
 
@@ -52,7 +52,7 @@ public class ManifestAnalyzeTask extends ApkTask {
         String mfStr = jb.getString("manifest");
 
         Manifest manifest = JSON.parseObject(mfStr,Manifest.class);
-
+        manifest.buildNumber = buildNumber;
         try {
             recordNum = DBconn.getInstance().addUpdDel("Manifest", MapTools.objectToMap(manifest));
         } catch (IllegalAccessException e) {

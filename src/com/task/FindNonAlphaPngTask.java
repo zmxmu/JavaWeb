@@ -34,8 +34,8 @@ public class FindNonAlphaPngTask extends ApkTask {
 
     private static final String TAG = "Syswin.FindNonAlphaPngTask";
 
-    public FindNonAlphaPngTask(String params) {
-        super(params);
+    public FindNonAlphaPngTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_FIND_NON_ALPHA_PNG;
     }
 

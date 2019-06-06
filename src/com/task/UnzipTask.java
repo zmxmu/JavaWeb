@@ -34,8 +34,8 @@ public class UnzipTask extends ApkTask {
     private static final String TAG = "Syswin.UnZipTask";
 
 
-    public UnzipTask(String params) {
-        super(params);
+    public UnzipTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_UNZIP;
     }
 

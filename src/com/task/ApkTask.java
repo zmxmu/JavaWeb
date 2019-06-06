@@ -35,6 +35,7 @@ public abstract class ApkTask implements Callable<TaskResult> {
     TaskResult taskResult;
     protected int type;
     protected String params;
+    protected int buildNumber;
     protected List<ApkTaskProgressListener> progressListeners;
 
     public interface ApkTaskProgressListener {
@@ -42,8 +43,9 @@ public abstract class ApkTask implements Callable<TaskResult> {
     }
 
 
-    public ApkTask(String params) {
+    public ApkTask(String params,int buildNumber) {
         this.params = params;
+        this.buildNumber = buildNumber;
         progressListeners = new LinkedList<>();
     }
 
@@ -55,6 +57,9 @@ public abstract class ApkTask implements Callable<TaskResult> {
         taskResult = new TaskResult(type);
         if (params == null ) {
             throw new TaskInitException(TAG + "---params can not be null!");
+        }
+        if (buildNumber == 0 ) {
+            throw new TaskInitException(TAG + "---buildNumber can not be 0!");
         }
     }
 

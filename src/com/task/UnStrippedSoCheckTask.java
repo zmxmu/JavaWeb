@@ -37,8 +37,8 @@ public class UnStrippedSoCheckTask extends ApkTask {
     private File libDir;
     private String toolnmPath;
 
-    public UnStrippedSoCheckTask(String params) {
-        super(params);
+    public UnStrippedSoCheckTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_UNSTRIPPED_SO;
     }
 

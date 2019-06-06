@@ -37,8 +37,8 @@ public class MultiSTLCheckTask extends ApkTask {
     private File libDir;
     private String toolnmPath;
 
-    public MultiSTLCheckTask(String params) {
-        super(params);
+    public MultiSTLCheckTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_CHECK_MULTISTL;
     }
 

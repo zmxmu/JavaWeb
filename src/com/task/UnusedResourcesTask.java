@@ -33,8 +33,8 @@ public class UnusedResourcesTask extends ApkTask {
 
     private static final String TAG = "Syswin.UnusedResourcesTask";
 
-    public UnusedResourcesTask(String params) {
-        super(params);
+    public UnusedResourcesTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TaskFactory.TASK_TYPE_UNUSED_RESOURCES;
     }
     @Override

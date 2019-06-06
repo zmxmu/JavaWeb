@@ -33,8 +33,8 @@ public class CountRTask extends ApkTask {
 
     private static final String TAG = "Syswin.CountRTask";
 
-    public CountRTask(String params) {
-        super(params);
+    public CountRTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_COUNT_R_CLASS;
     }
 

@@ -31,8 +31,8 @@ public class MultiLibCheckTask extends ApkTask {
     private static final String TAG = "Syswin.MultiLibCheckTask";
 
 
-    public MultiLibCheckTask(String params) {
-        super(params);
+    public MultiLibCheckTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_CHECK_MULTILIB;
     }
 

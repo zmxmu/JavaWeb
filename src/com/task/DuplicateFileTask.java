@@ -32,8 +32,8 @@ public class DuplicateFileTask extends ApkTask {
     private static final String TAG = "Syswin.DuplicateFileTask";
 
 
-    public DuplicateFileTask(String params) {
-        super(params);
+    public DuplicateFileTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TaskFactory.TASK_TYPE_DUPLICATE_FILE;
     }
 

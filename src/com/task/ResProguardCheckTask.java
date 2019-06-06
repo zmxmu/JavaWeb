@@ -38,8 +38,8 @@ public class ResProguardCheckTask extends ApkTask {
     private File inputFile;
     private Pattern fileNamePattern;
 
-    public ResProguardCheckTask(String params) {
-        super(params);
+    public ResProguardCheckTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_CHECK_RESGUARD;
     }
 

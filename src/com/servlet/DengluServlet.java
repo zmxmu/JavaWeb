@@ -27,8 +27,9 @@ public class DengluServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int taskType = Integer.parseInt(request.getParameter("taskType"));
+		int buildNumber = Integer.parseInt(request.getParameter("buildNumber"));
 		String param = request.getParameter("param");
-		ApkTask apkTask = TaskFactory.factory(taskType,param);
+		ApkTask apkTask = TaskFactory.factory(taskType,param,buildNumber);
 		apkTask.init();
 		response.setContentType("text/plain; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");

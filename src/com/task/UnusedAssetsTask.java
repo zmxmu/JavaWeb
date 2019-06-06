@@ -33,8 +33,8 @@ public class UnusedAssetsTask extends ApkTask {
 
     private static final String TAG = "Syswin.UnusedAssetsTask";
 
-    public UnusedAssetsTask(String params) {
-        super(params);
+    public UnusedAssetsTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TaskFactory.TASK_TYPE_UNUSED_ASSETS;
     }
 

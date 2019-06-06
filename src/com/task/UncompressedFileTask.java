@@ -41,8 +41,8 @@ public class UncompressedFileTask extends ApkTask {
     private Map<String, Long> uncompressSizeMap;
     private Map<String, Long> compressSizeMap;
 
-    public UncompressedFileTask(String params) {
-        super(params);
+    public UncompressedFileTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_UNCOMPRESSED_FILE;
     }
 

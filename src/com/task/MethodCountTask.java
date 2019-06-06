@@ -34,8 +34,8 @@ public class MethodCountTask extends ApkTask {
     private static final String TAG = "Syswin.MethodCountTask";
 
 
-    public MethodCountTask(String params) {
-        super(params);
+    public MethodCountTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_COUNT_METHOD;
     }
 

@@ -32,8 +32,8 @@ public class CountClassTask extends ApkTask {
     private static final String TAG = "Syswin.CountClassTask";
 
 
-    public CountClassTask(String params) {
-        super(params);
+    public CountClassTask(String params,int buildNumber) {
+        super(params,buildNumber);
         type = TASK_TYPE_COUNT_CLASS;
     }
 

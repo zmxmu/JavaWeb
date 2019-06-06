@@ -60,53 +60,53 @@ public final class TaskFactory {
             "Find out the unstripped shared library files.",
             "Count classes in dex file, output results group by package name."));
 
-    public static ApkTask factory(int taskType, String params) {
+    public static ApkTask factory(int taskType, String params,int buildNumber) {
         ApkTask task = null;
         switch (taskType) {
 //            case TASK_TYPE_UNZIP:
-//                task = new UnzipTask( params);
+//                task = new UnzipTask(params,buildNumber);
 //                break;
             case TASK_TYPE_MANIFEST:
-                task = new ManifestAnalyzeTask( params);
+                task = new ManifestAnalyzeTask(params,buildNumber);
                 break;
             case TASK_TYPE_SHOW_FILE_SIZE:
-                task = new ShowFileSizeTask( params);
+                task = new ShowFileSizeTask(params,buildNumber);
                 break;
             case TASK_TYPE_COUNT_METHOD:
-                task = new MethodCountTask( params);
+                task = new MethodCountTask(params,buildNumber);
                 break;
             case TASK_TYPE_CHECK_RESGUARD:
-                task = new ResProguardCheckTask( params);
+                task = new ResProguardCheckTask(params,buildNumber);
                 break;
             case TASK_TYPE_FIND_NON_ALPHA_PNG:
-                task = new FindNonAlphaPngTask( params);
+                task = new FindNonAlphaPngTask(params,buildNumber);
                 break;
             case TASK_TYPE_CHECK_MULTILIB:
-                task = new MultiLibCheckTask( params);
+                task = new MultiLibCheckTask(params,buildNumber);
                 break;
             case TASK_TYPE_UNCOMPRESSED_FILE:
-                task = new UncompressedFileTask( params);
+                task = new UncompressedFileTask(params,buildNumber);
                 break;
             case TASK_TYPE_COUNT_R_CLASS:
-                task = new CountRTask( params);
+                task = new CountRTask(params,buildNumber);
                 break;
             case TASK_TYPE_DUPLICATE_FILE:
-                task = new DuplicateFileTask( params);
+                task = new DuplicateFileTask(params,buildNumber);
                 break;
             case TASK_TYPE_CHECK_MULTISTL:
-                task = new MultiSTLCheckTask( params);
+                task = new MultiSTLCheckTask(params,buildNumber);
                 break;
             case TASK_TYPE_UNUSED_RESOURCES:
-                task = new UnusedResourcesTask( params);
+                task = new UnusedResourcesTask(params,buildNumber);
                 break;
             case TASK_TYPE_UNUSED_ASSETS:
-                task = new UnusedAssetsTask( params);
+                task = new UnusedAssetsTask(params,buildNumber);
                 break;
             case TASK_TYPE_UNSTRIPPED_SO:
-                task = new UnStrippedSoCheckTask( params);
+                task = new UnStrippedSoCheckTask(params,buildNumber);
                 break;
             case TASK_TYPE_COUNT_CLASS:
-                task = new CountClassTask( params);
+                task = new CountClassTask(params,buildNumber);
                 break;
             default:
                 break;
