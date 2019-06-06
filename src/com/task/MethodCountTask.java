@@ -16,11 +16,18 @@
 
 package com.task;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.entity.BigFile;
+import com.entity.MethodGroup;
 import com.exception.TaskExecuteException;
 import com.exception.TaskInitException;
 
 import com.result.TaskResult;
+import com.util.DBconn;
+import com.util.MapTools;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.task.TaskFactory.TASK_TYPE_COUNT_METHOD;
@@ -47,7 +54,22 @@ public class MethodCountTask extends ApkTask {
 
     @Override
     public TaskResult call() throws TaskExecuteException {
-        return null;
+        int recordNum = 0;
+
+        JSONObject jb = JSON.parseObject(params);
+        String str = jb.getString("groups");
+        List<MethodGroup> list= JSON.parseArray(str,MethodGroup.class);
+        for(;recordNum<list.size();recordNum++){
+            MethodGroup item = list.get(recordNum);
+            item.buildNumber = buildNumber;
+            try {
+                DBconn.getInstance().addUpdDel("MethodGroup", MapTools.objectToMap(item));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        taskResult.setResult(recordNum+"");
+        return taskResult;
     }
 
     @Override
