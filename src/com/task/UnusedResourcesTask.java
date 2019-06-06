@@ -17,11 +17,19 @@
 package com.task;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.entity.PNGFile;
+import com.entity.UnUsedRes;
 import com.exception.TaskExecuteException;
 import com.exception.TaskInitException;
 
 import com.result.TaskResult;
+import com.util.DBconn;
+import com.util.MapTools;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -45,7 +53,22 @@ public class UnusedResourcesTask extends ApkTask {
 
     @Override
     public TaskResult call() throws TaskExecuteException {
-        return null;
+        int recordNum = 0;
+        JSONObject jb = JSON.parseObject(params);
+        String str = jb.getString("unused-resources");
+        List<String> list= JSON.parseArray(str,String.class);
+        for(;recordNum<list.size();recordNum++){
+            UnUsedRes item = new UnUsedRes();
+            item.name = list.get(recordNum);
+            item.buildNumber = buildNumber;
+            try {
+                DBconn.getInstance().addUpdDel("UnUsedRes", MapTools.objectToMap(item));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        taskResult.setResult(recordNum+"");
+        return taskResult;
     }
 
     @Override
