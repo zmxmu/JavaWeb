@@ -30,13 +30,14 @@ public class DengluServlet extends HttpServlet {
 		int buildNumber = Integer.parseInt(request.getParameter("buildNumber"));
 		String param = request.getParameter("param");
 		ApkTask apkTask = TaskFactory.factory(taskType,param,buildNumber);
-		apkTask.init();
+
 		response.setContentType("text/plain; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		if(apkTask!=null){
+			apkTask.init();
 			try {
 				Future<TaskResult> result= executor.submit(apkTask);
-				response.getWriter().write(result.get().toString());
+				response.getWriter().write(result.get().getResult());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (ExecutionException e) {

@@ -75,39 +75,39 @@ public final class TaskFactory {
             case TASK_TYPE_COUNT_METHOD:
                 task = new MethodCountTask(params,buildNumber);
                 break;
-            case TASK_TYPE_CHECK_RESGUARD:
-                task = new ResProguardCheckTask(params,buildNumber);
-                break;
+//            case TASK_TYPE_CHECK_RESGUARD:
+//                task = new ResProguardCheckTask(params,buildNumber);
+//                break;
             case TASK_TYPE_FIND_NON_ALPHA_PNG:
                 task = new FindNonAlphaPngTask(params,buildNumber);
                 break;
-            case TASK_TYPE_CHECK_MULTILIB:
-                task = new MultiLibCheckTask(params,buildNumber);
-                break;
+//            case TASK_TYPE_CHECK_MULTILIB:
+//                task = new MultiLibCheckTask(params,buildNumber);
+//                break;
             case TASK_TYPE_UNCOMPRESSED_FILE:
                 task = new UncompressedFileTask(params,buildNumber);
                 break;
-            case TASK_TYPE_COUNT_R_CLASS:
-                task = new CountRTask(params,buildNumber);
-                break;
+//            case TASK_TYPE_COUNT_R_CLASS:
+//                task = new CountRTask(params,buildNumber);
+//                break;
             case TASK_TYPE_DUPLICATE_FILE:
                 task = new DuplicateFileTask(params,buildNumber);
                 break;
-            case TASK_TYPE_CHECK_MULTISTL:
-                task = new MultiSTLCheckTask(params,buildNumber);
-                break;
+//            case TASK_TYPE_CHECK_MULTISTL:
+//                task = new MultiSTLCheckTask(params,buildNumber);
+//                break;
             case TASK_TYPE_UNUSED_RESOURCES:
                 task = new UnusedResourcesTask(params,buildNumber);
                 break;
             case TASK_TYPE_UNUSED_ASSETS:
                 task = new UnusedAssetsTask(params,buildNumber);
                 break;
-            case TASK_TYPE_UNSTRIPPED_SO:
-                task = new UnStrippedSoCheckTask(params,buildNumber);
-                break;
-            case TASK_TYPE_COUNT_CLASS:
-                task = new CountClassTask(params,buildNumber);
-                break;
+//            case TASK_TYPE_UNSTRIPPED_SO:
+//                task = new UnStrippedSoCheckTask(params,buildNumber);
+//                break;
+//            case TASK_TYPE_COUNT_CLASS:
+//                task = new CountClassTask(params,buildNumber);
+//                break;
             default:
                 break;
         }
