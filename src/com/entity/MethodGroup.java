@@ -8,7 +8,7 @@ public class MethodGroup {
     public String  name;
 
     @JSONField(name="method-count")
-    public String  methodCount;
+    public int  methodCount;
 
     public int buildNumber;
 }

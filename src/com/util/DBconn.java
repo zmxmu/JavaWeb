@@ -25,15 +25,23 @@ public class DBconn {
 		return instance;
 	}
 	public int addUpdDel(String tableName, Map<String,Object> map){
+		return addUpdDel(tableName,map,null);
+	}
+	public int addUpdDel(String tableName, Map<String,Object> map,String excludedColumn){
 		StringBuffer sb = new StringBuffer();
 		sb.append("insert into "+tableName+"(");
 		StringBuffer keys = new StringBuffer();
 		StringBuffer values = new StringBuffer();
 		int i = 0;
+		int size = excludedColumn==null?map.size():map.size()-1;
+
 		for (HashMap.Entry<String, Object> entry : map.entrySet()) {
+			if(excludedColumn!=null && excludedColumn.equals(entry.getKey())){
+				continue;
+			}
 			keys.append(entry.getKey());
 			values.append("'"+entry.getValue()+"'");
-			if(i!=map.size()-1){
+			if(i!=size-1){
 				keys.append(",");
 				values.append(",");
 			}

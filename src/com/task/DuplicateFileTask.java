@@ -16,11 +16,17 @@
 
 package com.task;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.entity.DuplicateFile;
 import com.exception.TaskExecuteException;
 import com.exception.TaskInitException;
 
 import com.result.TaskResult;
+import com.util.DBconn;
+import com.util.MapTools;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,7 +51,29 @@ public class DuplicateFileTask extends ApkTask {
 
     @Override
     public TaskResult call() throws TaskExecuteException {
-        return null;
+        int recordNum = 0;
+        JSONObject jb = JSON.parseObject(params);
+        String str = jb.getString("files");
+        List<DuplicateFile> list= JSON.parseArray(str,DuplicateFile.class);
+        for(;recordNum<list.size();recordNum++){
+            DuplicateFile item = list.get(recordNum);
+            item.buildNumber = buildNumber;
+            StringBuffer sb = new StringBuffer();
+            for(int i = 0;i<item.files.size();i++){
+                sb.append(item.files.get(i));
+                if(i!=item.files.size()-1){
+                    sb.append(",");
+                }
+            }
+            item.fileSet = sb.toString();
+            try {
+                DBconn.getInstance().addUpdDel("DuplicateFile", MapTools.objectToMap(item),"files");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        taskResult.setResult(recordNum+"");
+        return taskResult;
     }
 
     @Override

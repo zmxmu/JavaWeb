@@ -7,7 +7,7 @@ public class BigFile {
     @JSONField(name="entry-name")
     public String  entryName;
     @JSONField(name="entry-size")
-    public String  entrySize;
+    public int  entrySize;
 
     public int buildNumber;
 }
