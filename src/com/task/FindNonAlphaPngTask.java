@@ -17,11 +17,18 @@
 package com.task;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.entity.PNGFile;
+import com.entity.MethodGroup;
 import com.exception.TaskExecuteException;
 import com.exception.TaskInitException;
 
 import com.result.TaskResult;
+import com.util.DBconn;
+import com.util.MapTools;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.task.TaskFactory.TASK_TYPE_FIND_NON_ALPHA_PNG;
@@ -47,7 +54,21 @@ public class FindNonAlphaPngTask extends ApkTask {
 
     @Override
     public TaskResult call() throws TaskExecuteException {
-        return null;
+        int recordNum = 0;
+        JSONObject jb = JSON.parseObject(params);
+        String str = jb.getString("files");
+        List<PNGFile> list= JSON.parseArray(str,PNGFile.class);
+        for(;recordNum<list.size();recordNum++){
+            PNGFile item = list.get(recordNum);
+            item.buildNumber = buildNumber;
+            try {
+                DBconn.getInstance().addUpdDel("PNGFile", MapTools.objectToMap(item));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        taskResult.setResult(recordNum+"");
+        return taskResult;
     }
 
     @Override
