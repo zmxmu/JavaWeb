@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.task.TaskFactory.TASK_TYPE_COUNT_METHOD;
+import static com.task.TaskFactory.TaskDescription;
 
 /**
  * Created by jinqiuchen on 17/6/1.
@@ -68,7 +69,7 @@ public class MethodCountTask extends ApkTask {
                 e.printStackTrace();
             }
         }
-        taskResult.setResult(recordNum+"");
+        taskResult.setResult(TaskDescription.get(taskResult.taskType)+":"+recordNum+"");
         return taskResult;
     }
 

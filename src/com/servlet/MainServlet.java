@@ -15,8 +15,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 
-public class DengluServlet extends HttpServlet {
-	public DengluServlet(){
+public class MainServlet extends HttpServlet {
+	public MainServlet(){
 		executor = Executors.newFixedThreadPool(1);
 	}
 	private ExecutorService executor;

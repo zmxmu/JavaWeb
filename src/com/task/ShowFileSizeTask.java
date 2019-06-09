@@ -28,6 +28,7 @@ import com.util.MapTools;
 import java.util.List;
 
 import static com.task.TaskFactory.TASK_TYPE_SHOW_FILE_SIZE;
+import static com.task.TaskFactory.TaskDescription;
 
 
 /**
@@ -65,7 +66,7 @@ public class ShowFileSizeTask extends ApkTask {
                 e.printStackTrace();
             }
         }
-        taskResult.setResult(recordNum+"");
+        taskResult.setResult(TaskDescription.get(taskResult.taskType)+":"+recordNum+"");
         return taskResult;
     }
 

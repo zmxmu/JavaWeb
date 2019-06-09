@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.task.TaskFactory.TASK_TYPE_FIND_NON_ALPHA_PNG;
+import static com.task.TaskFactory.TaskDescription;
 
 /**
  * Created by jinqiuchen on 17/6/12.
@@ -67,7 +68,7 @@ public class FindNonAlphaPngTask extends ApkTask {
                 e.printStackTrace();
             }
         }
-        taskResult.setResult(recordNum+"");
+        taskResult.setResult(TaskDescription.get(taskResult.taskType)+":"+recordNum+"");
         return taskResult;
     }
 

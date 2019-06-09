@@ -30,6 +30,8 @@ import com.util.MapTools;
 import java.util.List;
 import java.util.Map;
 
+import static com.task.TaskFactory.TaskDescription;
+
 
 /**
  * Created by jinqiuchen on 17/7/11.
@@ -66,7 +68,7 @@ public class UnusedAssetsTask extends ApkTask {
                 e.printStackTrace();
             }
         }
-        taskResult.setResult(recordNum+"");
+        taskResult.setResult(TaskDescription.get(taskResult.taskType)+":"+recordNum+"");
         return taskResult;
     }
 

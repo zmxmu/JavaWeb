@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.task.TaskFactory.TASK_TYPE_UNCOMPRESSED_FILE;
+import static com.task.TaskFactory.TaskDescription;
 
 /**
  * Created by jinqiuchen on 17/6/21.
@@ -73,7 +74,7 @@ public class UncompressedFileTask extends ApkTask {
                 e.printStackTrace();
             }
         }
-        taskResult.setResult(recordNum+"");
+        taskResult.setResult(TaskDescription.get(taskResult.taskType)+":"+recordNum+"");
         return taskResult;
     }
 
