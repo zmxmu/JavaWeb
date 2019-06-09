@@ -19,12 +19,20 @@
     <servlet-name>MainServlet</servlet-name>
     <servlet-class>com.servlet.MainServlet</servlet-class>
   </servlet>
-
+    <servlet>
+        <servlet-name>BuildListServlet</servlet-name>
+        <servlet-class>com.servlet.BuildListServlet</servlet-class>
+    </servlet>
 
   <servlet-mapping>
     <servlet-name>MainServlet</servlet-name>
     <url-pattern>/MainServlet</url-pattern>
   </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>BuildListServlet</servlet-name>
+        <url-pattern>/BuildListServlet</url-pattern>
+    </servlet-mapping>
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

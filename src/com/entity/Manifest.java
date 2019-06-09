@@ -16,5 +16,9 @@ public class Manifest {
     public String  versionName;
 
     public int buildNumber;
+
+    public int size;
+
+    public String buildTime;
 }
 

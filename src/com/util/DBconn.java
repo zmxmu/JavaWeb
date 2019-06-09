@@ -60,8 +60,7 @@ public class DBconn {
 		}
 		return i;
 	}
-	public ResultSet selectSql(String tableName){
-		String sql = "select * from "+tableName;
+	public ResultSet selectSql(String sql){
 		try {
 			ps =  conn.prepareStatement(sql);
 			rs =  ps.executeQuery(sql);
