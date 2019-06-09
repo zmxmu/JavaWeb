@@ -19,6 +19,6 @@ public class Manifest {
 
     public int size;
 
-    public String buildTime;
+    public long buildTime;
 }
 

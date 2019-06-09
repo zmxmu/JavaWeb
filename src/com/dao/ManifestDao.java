@@ -21,6 +21,8 @@ public class ManifestDao implements ApkDao {
             item.targetSdkVersion = rs.getString("targetSdkVersion");
             item.versionCode = rs.getString("versionCode");
             item.versionName = rs.getString("versionName");
+            item.buildTime = rs.getLong("buildTime");
+            item.size = rs.getInt("size");
             result.add(item);
         }
         return result;

@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.math.BigDecimal" %>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -49,32 +51,40 @@
 <body>
 <table class="hovertable">
   <tr>
-    <th  colspan="6">利润表</th>
+    <th  colspan="6">构建表</th>
   </tr>
   <tr>
     <th>构建编号</th>
     <th>版本号</th>
     <th>版本名</th>
-    <th>大小</th>
+    <th>大小(MB)</th>
     <th>构建时间</th>
     <th></th>
   </tr>
   <%
     List list=null;
+    SimpleDateFormat df = new SimpleDateFormat("yy年MM月dd日HH时mm分");
+
     if(session.getAttribute("buildList")!=null){
       list=(List)session.getAttribute("buildList");
       if(list.size()>0){
         Manifest pf;
+        String bt;
+        BigDecimal bd;
+
         for(int i=0;i<list.size();i++){
           pf=new Manifest();
           pf=(Manifest)list.get(i);
+          bt = df.format(pf.buildTime);
+          bd= new BigDecimal(pf.size/1048576);
+          bd = bd.setScale(2,BigDecimal.ROUND_HALF_UP);
   %>
   <tr>
     <td><%=pf.buildNumber %></td>
     <td><%=pf.versionCode %></td>
     <td><%=pf.versionName %></td>
-    <td><%=pf.size %></td>
-    <td><%=pf.buildTime %></td>
+    <td><%=bd %></td>
+    <td><%=bt %></td>
     <td>查看</td>
   </tr>
   <%

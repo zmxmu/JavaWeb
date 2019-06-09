@@ -53,6 +53,7 @@ public class ManifestAnalyzeTask extends ApkTask {
 
         Manifest manifest = JSON.parseObject(mfStr,Manifest.class);
         manifest.buildNumber = buildNumber;
+        manifest.buildTime = startTime;
         try {
             recordNum = DBconn.getInstance().addUpdDel("Manifest", MapTools.objectToMap(manifest));
         } catch (IllegalAccessException e) {
