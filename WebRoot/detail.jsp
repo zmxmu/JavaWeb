@@ -207,7 +207,7 @@
     List<MethodGroup> methodGroupList=null;
     if(session.getAttribute("methodGroupList")!=null){
       methodGroupList=(List)session.getAttribute("methodGroupList");
-      if(bigFileList.size()>0){
+      if(methodGroupList.size()>0){
         MethodGroup pf;
         for(int i=0;i<methodGroupList.size();i++){
           pf=methodGroupList.get(i);
@@ -215,6 +215,38 @@
   <tr>
     <td><%=pf.name %></td>
     <td><%=pf.methodCount %></td>
+  </tr>
+  <%
+    }
+  %>
+  <%
+      }
+    }
+
+  %>
+</table>
+<table class="hovertable">
+  <tr>
+    <th  colspan="3">重复文件统计列表</th>
+  </tr>
+  <tr>
+    <th>md5值</th>
+    <th>大小(KB)</th>
+    <th>重复文件</th>
+  </tr>
+  <%
+    List<DuplicateFile> duplicateFileList=null;
+    if(session.getAttribute("duplicateFileList")!=null){
+      duplicateFileList=(List)session.getAttribute("duplicateFileList");
+      if(duplicateFileList.size()>0){
+        DuplicateFile pf;
+        for(int i=0;i<duplicateFileList.size();i++){
+          pf=duplicateFileList.get(i);
+  %>
+  <tr>
+    <td><%=pf.md5 %></td>
+    <td><%=pf.size %></td>
+    <td><%=pf.fileSet %></td>
   </tr>
   <%
     }
