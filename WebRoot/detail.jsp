@@ -144,14 +144,43 @@
     <th>大小(byte)</th>
   </tr>
   <%
-    List list=null;
+    List<PNGFile> pNGFileList=null;
     if(session.getAttribute("pNGFileList")!=null){
-      list=(List)session.getAttribute("pNGFileList");
-      if(list.size()>0){
+      pNGFileList=(List)session.getAttribute("pNGFileList");
+      if(pNGFileList.size()>0){
         PNGFile pf;
-        for(int i=0;i<list.size();i++){
-          pf=new PNGFile();
-          pf=(PNGFile)list.get(i);
+        for(int i=0;i<pNGFileList.size();i++){
+          pf=pNGFileList.get(i);
+  %>
+  <tr>
+    <td><%=pf.entryName %></td>
+    <td><%=pf.entrySize %></td>
+  </tr>
+  <%
+    }
+  %>
+  <%
+      }
+    }
+
+  %>
+</table>
+<table class="hovertable">
+  <tr>
+    <th  colspan="2">大文件列表</th>
+  </tr>
+  <tr>
+    <th>文件名</th>
+    <th>大小(byte)</th>
+  </tr>
+  <%
+    List<BigFile> bigFileList=null;
+    if(session.getAttribute("bigFileList")!=null){
+      bigFileList=(List)session.getAttribute("bigFileList");
+      if(bigFileList.size()>0){
+        BigFile pf;
+        for(int i=0;i<bigFileList.size();i++){
+          pf=bigFileList.get(i);
   %>
   <tr>
     <td><%=pf.entryName %></td>

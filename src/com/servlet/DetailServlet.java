@@ -39,7 +39,7 @@ public class DetailServlet extends HttpServlet {
 		List<Manifest> unUsedResList;
 
 		try {
-			bigFileList = bigFileDao.queryAll(buildNumber);
+			bigFileList = bigFileDao.queryTop(buildNumber);
 			componentList = componentDao.queryAll(buildNumber);
 			duplicateFileList = duplicateFileDao.queryAll(buildNumber);
 			methodGroupList = methodGroupDao.queryAll(buildNumber);
