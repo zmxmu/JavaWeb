@@ -15,10 +15,22 @@ public class Manifest {
     @JSONField(name="android:versionName")
     public String  versionName;
 
+
+
     public int buildNumber;
 
-    public int size;
+
+    public float size;
 
     public long buildTime;
+
+    public float getSize() {
+        return size;
+    }
+
+
+    public int getBuildNumber() {
+        return buildNumber;
+    }
 }
 

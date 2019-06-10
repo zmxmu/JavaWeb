@@ -33,5 +33,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="library" name="servlet-api" level="project" />
     <orderEntry type="library" name="com.alibaba:fastjson:1.2.55" level="project" />
+    <orderEntry type="library" name="javax.servlet:jstl:1.2" level="project" />
   </component>
 </module>

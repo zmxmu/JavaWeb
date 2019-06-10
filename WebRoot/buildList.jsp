@@ -1,6 +1,7 @@
-<%@ page language="java" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.math.BigDecimal" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
   String path = request.getContextPath();
   String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,6 +21,7 @@
   <!--
   <link rel="stylesheet" type="text/css" href="styles.css">
   -->
+  <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
   <style type="text/css">
     table.hovertable{
       font-family:verdana,arial.sans-serif;
@@ -49,6 +51,49 @@
 </head>
 
 <body>
+<div id="container" style="height: 100%"></div>
+
+<script type="text/javascript">
+  var dom = document.getElementById("container");
+  var myChart = echarts.init(dom);
+  var app = {};
+  option = null;
+  var arrBuildNumber = new Array();
+  var arrSize = new Array();
+  var index = 0;
+  <c:forEach items="${buildListTop}" var="bl">
+    arrBuildNumber[index] = ${bl.buildNumber};
+    arrSize[index] = ${bl.size};
+    index++;
+  </c:forEach>
+
+  option = {
+    title: {
+      text: '安装包大小对比图'
+    },
+    tooltip: {
+      show: true
+    },
+    legend: {
+      data:['MB']
+    },
+    xAxis: {
+      type: 'category',
+      data: arrBuildNumber
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      data: arrSize,
+      type: 'bar'
+    }]
+  };
+  ;
+  if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+  }
+</script>
 <table class="hovertable">
   <tr>
     <th  colspan="6">构建表</th>
@@ -70,20 +115,17 @@
       if(list.size()>0){
         Manifest pf;
         String bt;
-        BigDecimal bd;
 
         for(int i=0;i<list.size();i++){
           pf=new Manifest();
           pf=(Manifest)list.get(i);
           bt = df.format(pf.buildTime);
-          bd= new BigDecimal(pf.size/1048576);
-          bd = bd.setScale(2,BigDecimal.ROUND_HALF_UP);
   %>
   <tr>
     <td><%=pf.buildNumber %></td>
     <td><%=pf.versionCode %></td>
     <td><%=pf.versionName %></td>
-    <td><%=bd %></td>
+    <td><%=pf.size %></td>
     <td><%=bt %></td>
     <td>查看</td>
   </tr>

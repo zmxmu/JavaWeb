@@ -11,8 +11,17 @@ import java.util.List;
 public class ManifestDao implements ApkDao {
     @Override
     public List<Manifest> queryAll() throws SQLException{
+        return querySql("select * from Manifest order by buildTime desc");
+    }
+
+    @Override
+    public List<Manifest> queryTop() throws SQLException {
+        return querySql("select * from Manifest order by buildTime asc limit 6");
+    }
+
+    private List<Manifest> querySql(String sql) throws SQLException{
         List<Manifest> result = new ArrayList<>();
-        ResultSet rs = DBconn.getInstance().selectSql("select * from Manifest");
+        ResultSet rs = DBconn.getInstance().selectSql(sql);
         while(rs!=null && rs.next()){
             Manifest item = new Manifest();
             item.buildNumber = rs.getInt("buildNumber");
@@ -22,7 +31,7 @@ public class ManifestDao implements ApkDao {
             item.versionCode = rs.getString("versionCode");
             item.versionName = rs.getString("versionName");
             item.buildTime = rs.getLong("buildTime");
-            item.size = rs.getInt("size");
+            item.size = rs.getFloat("size");
             result.add(item);
         }
         return result;
