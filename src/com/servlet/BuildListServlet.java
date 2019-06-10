@@ -28,12 +28,12 @@ public class BuildListServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ApkDao dao = new ManifestDao();
+		ApkDao<Manifest> dao = new ManifestDao();
 		List<Manifest> buildList;
 		List<Manifest> buildListTop;
 		try {
-			buildList = dao.queryAll();
-			buildListTop = dao.queryTop();
+			buildList = dao.queryAll("");
+			buildListTop = dao.queryTop("");
 			request.getSession().setAttribute("buildList", buildList);
 			request.getSession().setAttribute("buildListTop", buildListTop);
 			request.getRequestDispatcher("/buildList.jsp").forward(request, response);

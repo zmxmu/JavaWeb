@@ -26,7 +26,7 @@ public final class TaskFactory {
     /*
             The value of TASK_TYPE_XXX is also the index of TaskDescription.
       */
-    public static final int TASK_TYPE_UNZIP = 1;
+    public static final int TASK_TYPE_COMPONENT = 1;
     public static final int TASK_TYPE_MANIFEST = 2;
     public static final int TASK_TYPE_SHOW_FILE_SIZE = 3;
     public static final int TASK_TYPE_COUNT_METHOD = 4;
@@ -63,6 +63,9 @@ public final class TaskFactory {
     public static ApkTask factory(int taskType, String params,int buildNumber) {
         ApkTask task = null;
         switch (taskType) {
+            case TASK_TYPE_COMPONENT:
+                task = new ComponentTask(params,buildNumber);
+                break;
             case TASK_TYPE_MANIFEST:
                 task = new ManifestAnalyzeTask(params,buildNumber);
                 break;

@@ -3,19 +3,20 @@ package com.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class UnZipFile {
+public class Component {
 
     public String getSuffix() {
         return suffix;
     }
 
-    public int getTotalSize() {
+    public String  suffix;
+
+    public float getTotalSize() {
         return totalSize;
     }
 
-    public String  suffix;
     @JSONField(name="total-size")
-    public int  totalSize;
+    public float  totalSize;
 
     public int buildNumber;
 }

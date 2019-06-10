@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.*,com.entity.*" pageEncoding="utf-8"%>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.math.BigDecimal" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
   String path = request.getContextPath();
@@ -104,7 +103,7 @@
     <th>版本名</th>
     <th>大小(MB)</th>
     <th>构建时间</th>
-    <th></th>
+    <th>详情</th>
   </tr>
   <%
     List list=null;
@@ -115,11 +114,13 @@
       if(list.size()>0){
         Manifest pf;
         String bt;
-
+        String hrefStr;
         for(int i=0;i<list.size();i++){
           pf=new Manifest();
           pf=(Manifest)list.get(i);
+          hrefStr = basePath+"DetailServlet?buildNumber="+pf.buildNumber;
           bt = df.format(pf.buildTime);
+
   %>
   <tr>
     <td><%=pf.buildNumber %></td>
@@ -127,7 +128,7 @@
     <td><%=pf.versionName %></td>
     <td><%=pf.size %></td>
     <td><%=bt %></td>
-    <td>查看</td>
+    <td><a class="button" href="<%=hrefStr%>">查看</a></td>
   </tr>
   <%
     }

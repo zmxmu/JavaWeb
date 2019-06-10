@@ -18,63 +18,46 @@ package com.task;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.entity.DuplicateFile;
+import com.entity.Manifest;
 import com.exception.TaskExecuteException;
 import com.exception.TaskInitException;
-
 import com.result.TaskResult;
 import com.util.DBconn;
 import com.util.MapTools;
 
-import java.util.List;
-import java.util.Map;
-
-import static com.task.TaskFactory.TaskDescription;
-
-/**
- * Created by jinqiuchen on 17/6/27.
- */
-
-public class DuplicateFileTask extends ApkTask {
-
-    private static final String TAG = "Syswin.DuplicateFileTask";
+import static com.task.TaskFactory.TASK_TYPE_COMPONENT;
 
 
-    public DuplicateFileTask(String params,int buildNumber) {
+public class UnzipTask extends ApkTask {
+
+    private static final String TAG = "Syswin.UnzipTask";
+
+    public UnzipTask(String params, int buildNumber) {
         super(params,buildNumber);
-        type = TaskFactory.TASK_TYPE_DUPLICATE_FILE;
+        type = TASK_TYPE_COMPONENT;
     }
 
     @Override
     public void init() throws TaskInitException {
         super.init();
-
     }
 
     @Override
     public TaskResult call() throws TaskExecuteException {
+
         int recordNum = 0;
         JSONObject jb = JSON.parseObject(params);
-        String str = jb.getString("files");
-        List<DuplicateFile> list= JSON.parseArray(str,DuplicateFile.class);
-        for(;recordNum<list.size();recordNum++){
-            DuplicateFile item = list.get(recordNum);
-            item.buildNumber = buildNumber;
-            StringBuffer sb = new StringBuffer();
-            for(int i = 0;i<item.files.size();i++){
-                sb.append(item.files.get(i));
-                if(i!=item.files.size()-1){
-                    sb.append(System.getProperty("line.separator"));
-                }
-            }
-            item.fileSet = sb.toString();
-            try {
-                DBconn.getInstance().addUpdDel("DuplicateFile", MapTools.objectToMap(item),"files");
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        String mfStr = jb.getString("manifest");
+
+        Manifest manifest = JSON.parseObject(mfStr,Manifest.class);
+        manifest.buildNumber = buildNumber;
+        try {
+            recordNum = DBconn.getInstance().addUpdDel("Manifest", MapTools.objectToMap(manifest));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
-        taskResult.setResult(TaskDescription.get(taskResult.taskType)+":"+recordNum+"");
+        taskResult.setResult(TaskFactory.TaskDescription.get(type)+":"+recordNum);
+
         return taskResult;
     }
 

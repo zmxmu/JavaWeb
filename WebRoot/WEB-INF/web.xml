@@ -23,6 +23,10 @@
         <servlet-name>BuildListServlet</servlet-name>
         <servlet-class>com.servlet.BuildListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailServlet</servlet-name>
+        <servlet-class>com.servlet.DetailServlet</servlet-class>
+    </servlet>
 
   <servlet-mapping>
     <servlet-name>MainServlet</servlet-name>
@@ -33,8 +37,12 @@
         <servlet-name>BuildListServlet</servlet-name>
         <url-pattern>/BuildListServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailServlet</servlet-name>
+        <url-pattern>/DetailServlet</url-pattern>
+    </servlet-mapping>
 
-  <welcome-file-list>
+    <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

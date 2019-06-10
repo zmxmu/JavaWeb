@@ -18,62 +18,72 @@ package com.task;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.entity.DuplicateFile;
+import com.entity.Component;
+import com.entity.Component;
 import com.exception.TaskExecuteException;
 import com.exception.TaskInitException;
-
 import com.result.TaskResult;
 import com.util.DBconn;
 import com.util.MapTools;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
+import static com.task.TaskFactory.TASK_TYPE_COMPONENT;
 import static com.task.TaskFactory.TaskDescription;
 
-/**
- * Created by jinqiuchen on 17/6/27.
- */
 
-public class DuplicateFileTask extends ApkTask {
+public class ComponentTask extends ApkTask {
 
-    private static final String TAG = "Syswin.DuplicateFileTask";
+    private static final String TAG = "Syswin.TASK_TYPE_COMPONENT";
+    private float MB = 1024*1024;
 
-
-    public DuplicateFileTask(String params,int buildNumber) {
+    public ComponentTask(String params, int buildNumber) {
         super(params,buildNumber);
-        type = TaskFactory.TASK_TYPE_DUPLICATE_FILE;
+        type = TASK_TYPE_COMPONENT;
     }
 
     @Override
     public void init() throws TaskInitException {
         super.init();
-
     }
 
     @Override
     public TaskResult call() throws TaskExecuteException {
+
         int recordNum = 0;
         JSONObject jb = JSON.parseObject(params);
-        String str = jb.getString("files");
-        List<DuplicateFile> list= JSON.parseArray(str,DuplicateFile.class);
+        String str = jb.getString("entries");
+        float totalSize = jb.getInteger("total-size")/MB;
+        float mainSize = 0F;
+
+        List<Component> list= JSON.parseArray(str,Component.class);
         for(;recordNum<list.size();recordNum++){
-            DuplicateFile item = list.get(recordNum);
+            Component item = list.get(recordNum);
             item.buildNumber = buildNumber;
-            StringBuffer sb = new StringBuffer();
-            for(int i = 0;i<item.files.size();i++){
-                sb.append(item.files.get(i));
-                if(i!=item.files.size()-1){
-                    sb.append(System.getProperty("line.separator"));
+            BigDecimal bd= new BigDecimal(item.totalSize/MB);
+            bd = bd.setScale(2,BigDecimal.ROUND_HALF_UP);
+            item.totalSize = bd.floatValue();
+            if(item.totalSize>1F){
+                mainSize+=item.totalSize;
+                try {
+                    DBconn.getInstance().addUpdDel("Component", MapTools.objectToMap(item));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
             }
-            item.fileSet = sb.toString();
-            try {
-                DBconn.getInstance().addUpdDel("DuplicateFile", MapTools.objectToMap(item),"files");
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
         }
+        Component item = new Component();
+        item.buildNumber = buildNumber;
+        item.suffix = "other";
+        item.totalSize = totalSize - mainSize;
+        try {
+            DBconn.getInstance().addUpdDel("Component", MapTools.objectToMap(item));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        recordNum++;
+
         taskResult.setResult(TaskDescription.get(taskResult.taskType)+":"+recordNum+"");
         return taskResult;
     }
