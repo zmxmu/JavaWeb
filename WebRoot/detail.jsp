@@ -257,5 +257,30 @@
 
   %>
 </table>
+<table class="hovertable">
+  <tr>
+    <th  colspan="3">无用资源文件统计列表</th>
+  </tr>
+  <%
+    List<UnUsedAsset> unUsedAssetList=null;
+    if(session.getAttribute("unUsedAssetList")!=null){
+      unUsedAssetList=(List)session.getAttribute("unUsedAssetList");
+      if(unUsedAssetList.size()>0){
+        UnUsedAsset pf;
+        for(int i=0;i<unUsedAssetList.size();i++){
+          pf=unUsedAssetList.get(i);
+  %>
+  <tr>
+    <td><%=pf.name %></td>
+  </tr>
+  <%
+    }
+  %>
+  <%
+      }
+    }
+
+  %>
+</table>
 </body>
 </html>

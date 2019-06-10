@@ -1,7 +1,7 @@
 package com.servlet;
 
 import com.dao.*;
-import com.entity.Manifest;
+import com.entity.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,14 +29,14 @@ public class DetailServlet extends HttpServlet {
 		ApkDao unUsedResDao = new UnUsedResDao();
 		ApkDao unZipFileDao = new UnZipFileDao();
 
-		List<Manifest> bigFileList;
-		List<Manifest> componentList;
-		List<Manifest> unZipFileList;
-		List<Manifest> duplicateFileList;
-		List<Manifest> methodGroupList;
-		List<Manifest> pNGFileList;
-		List<Manifest> unUsedAssetList;
-		List<Manifest> unUsedResList;
+		List<BigFile> bigFileList;
+		List<Component> componentList;
+		List<UnZipFile> unZipFileList;
+		List<DuplicateFile> duplicateFileList;
+		List<MethodGroup> methodGroupList;
+		List<PNGFile> pNGFileList;
+		List<UnUsedAsset> unUsedAssetList;
+		List<UnUsedRes> unUsedResList;
 
 		try {
 			bigFileList = bigFileDao.queryTop(buildNumber);
