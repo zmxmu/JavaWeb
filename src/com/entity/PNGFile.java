@@ -11,12 +11,12 @@ public class PNGFile {
         return entryName;
     }
 
-    public int getEntrySize() {
+    public float getEntrySize() {
         return entrySize;
     }
 
     @JSONField(name="entry-size")
-    public int  entrySize;
+    public float  entrySize;
 
     public int buildNumber;
 }

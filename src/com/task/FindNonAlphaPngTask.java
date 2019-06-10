@@ -62,6 +62,7 @@ public class FindNonAlphaPngTask extends ApkTask {
         for(;recordNum<list.size();recordNum++){
             PNGFile item = list.get(recordNum);
             item.buildNumber = buildNumber;
+            item.entrySize = item.entrySize/(float)1024;
             try {
                 DBconn.getInstance().addUpdDel("PNGFile", MapTools.objectToMap(item));
             } catch (IllegalAccessException e) {

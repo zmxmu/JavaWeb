@@ -11,12 +11,12 @@ public class BigFile {
     @JSONField(name="entry-name")
     public String  entryName;
 
-    public int getEntrySize() {
+    public float getEntrySize() {
         return entrySize;
     }
 
     @JSONField(name="entry-size")
-    public int  entrySize;
+    public float  entrySize;
 
     public int buildNumber;
 }

@@ -68,6 +68,7 @@ public class DuplicateFileTask extends ApkTask {
                 }
             }
             item.fileSet = sb.toString();
+            item.size = item.size/(float)1024;
             try {
                 DBconn.getInstance().addUpdDel("DuplicateFile", MapTools.objectToMap(item),"files");
             } catch (IllegalAccessException e) {

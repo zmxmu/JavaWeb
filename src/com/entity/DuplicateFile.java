@@ -7,13 +7,13 @@ import java.util.List;
 
 public class DuplicateFile {
     public String  md5;
-    public int  size;
+    public float  size;
 
     public String getMd5() {
         return md5;
     }
 
-    public int getSize() {
+    public float getSize() {
         return size;
     }
 

@@ -9,13 +9,13 @@ public class UnZipFile {
         return suffix;
     }
 
-    public int getTotalSize() {
+    public float getTotalSize() {
         return totalSize;
     }
 
     public String  suffix;
     @JSONField(name="total-size")
-    public int  totalSize;
+    public float  totalSize;
 
     public int buildNumber;
 }

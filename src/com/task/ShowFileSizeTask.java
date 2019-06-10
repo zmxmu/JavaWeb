@@ -60,6 +60,7 @@ public class ShowFileSizeTask extends ApkTask {
         for(;recordNum<list.size();recordNum++){
             BigFile item = list.get(recordNum);
             item.buildNumber = buildNumber;
+            item.entrySize = item.entrySize/(float)1024;
             try {
                 DBconn.getInstance().addUpdDel("BigFile", MapTools.objectToMap(item));
             } catch (IllegalAccessException e) {

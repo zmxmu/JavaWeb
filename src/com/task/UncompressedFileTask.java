@@ -68,6 +68,7 @@ public class UncompressedFileTask extends ApkTask {
         for(;recordNum<list.size();recordNum++){
             UnZipFile item = list.get(recordNum);
             item.buildNumber = buildNumber;
+            item.totalSize = item.totalSize/(float)1024;
             try {
                 DBconn.getInstance().addUpdDel("UnZipFile", MapTools.objectToMap(item));
             } catch (IllegalAccessException e) {

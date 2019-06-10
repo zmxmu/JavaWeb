@@ -19,14 +19,12 @@ package com.task;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.entity.Component;
-import com.entity.Component;
 import com.exception.TaskExecuteException;
 import com.exception.TaskInitException;
 import com.result.TaskResult;
 import com.util.DBconn;
 import com.util.MapTools;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static com.task.TaskFactory.TASK_TYPE_COMPONENT;
@@ -61,9 +59,7 @@ public class ComponentTask extends ApkTask {
         for(;recordNum<list.size();recordNum++){
             Component item = list.get(recordNum);
             item.buildNumber = buildNumber;
-            BigDecimal bd= new BigDecimal(item.totalSize/MB);
-            bd = bd.setScale(2,BigDecimal.ROUND_HALF_UP);
-            item.totalSize = bd.floatValue();
+            item.totalSize = item.totalSize/MB;
             if(item.totalSize>1F){
                 mainSize+=item.totalSize;
                 try {
