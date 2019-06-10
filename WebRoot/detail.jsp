@@ -43,12 +43,11 @@
 
 <body>
 <div id="component" style="width: 600px;height:400px;"></div>
-
+<div id="unZipFile" style="width: 600px;height:400px;"></div>
 <script type="text/javascript">
-  var dom = document.getElementById("component");
-  var myChart = echarts.init(dom);
-
-  option = {
+  var componentDom = document.getElementById("component");
+  var componentChart = echarts.init(componentDom);
+  componentOption = {
     title : {
       text: 'apk成份占比图',
       x:'center'
@@ -87,8 +86,53 @@
       }
     ]
   };
-  if (option && typeof option === "object") {
-    myChart.setOption(option, true);
+  if (componentOption && typeof componentOption === "object") {
+    componentChart.setOption(componentOption, true);
+  }
+
+  var unZipFileDom = document.getElementById("unZipFile");
+  var unZipFileChart = echarts.init(unZipFileDom);
+  unZipFileOption = {
+    title : {
+      text: 'apk成份占比图',
+      x:'center'
+    },
+    tooltip : {
+      trigger: 'item',
+      formatter: '{a} <br/>{b} : {c} ({d}%)'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left',
+      data: [
+        <c:forEach items="${unZipFileList}" var="c">
+        ["${c.suffix}"],
+        </c:forEach>
+      ]
+    },
+    series : [
+      {
+        name: '大小(byte)',
+        type: 'pie',
+        radius : '55%',
+        center: ['50%', '60%'],
+        data:[
+          <c:forEach items="${unZipFileList}" var="unZipFile">
+          {value:"${unZipFile.totalSize}", name:"${unZipFile.suffix}"},
+          </c:forEach>
+        ],
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  };
+  if (unZipFileOption && typeof unZipFileOption === "object") {
+    unZipFileChart.setOption(unZipFileOption, true);
   }
 </script>
 <table class="hovertable">
