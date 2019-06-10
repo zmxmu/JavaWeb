@@ -94,7 +94,7 @@
   var unZipFileChart = echarts.init(unZipFileDom);
   unZipFileOption = {
     title : {
-      text: 'apk成份占比图',
+      text: '未压缩文件占比图',
       x:'center'
     },
     tooltip : {
@@ -112,7 +112,7 @@
     },
     series : [
       {
-        name: '大小(byte)',
+        name: '大小(KB)',
         type: 'pie',
         radius : '55%',
         center: ['50%', '60%'],
@@ -141,7 +141,7 @@
   </tr>
   <tr>
     <th>文件名</th>
-    <th>大小(byte)</th>
+    <th>大小(KB)</th>
   </tr>
   <%
     List<PNGFile> pNGFileList=null;
@@ -171,7 +171,7 @@
   </tr>
   <tr>
     <th>文件名</th>
-    <th>大小(byte)</th>
+    <th>大小(KB)</th>
   </tr>
   <%
     List<BigFile> bigFileList=null;
@@ -185,6 +185,36 @@
   <tr>
     <td><%=pf.entryName %></td>
     <td><%=pf.entrySize %></td>
+  </tr>
+  <%
+    }
+  %>
+  <%
+      }
+    }
+
+  %>
+</table>
+<table class="hovertable">
+  <tr>
+    <th  colspan="2">方法数统计列表</th>
+  </tr>
+  <tr>
+    <th>包名</th>
+    <th>个数</th>
+  </tr>
+  <%
+    List<MethodGroup> methodGroupList=null;
+    if(session.getAttribute("methodGroupList")!=null){
+      methodGroupList=(List)session.getAttribute("methodGroupList");
+      if(bigFileList.size()>0){
+        MethodGroup pf;
+        for(int i=0;i<methodGroupList.size();i++){
+          pf=methodGroupList.get(i);
+  %>
+  <tr>
+    <td><%=pf.name %></td>
+    <td><%=pf.methodCount %></td>
   </tr>
   <%
     }
