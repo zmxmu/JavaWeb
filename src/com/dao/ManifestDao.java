@@ -11,12 +11,12 @@ import java.util.List;
 public class ManifestDao implements ApkDao {
     @Override
     public List<Manifest> queryAll(String buildNumber) throws SQLException{
-        return querySql("select * from Manifest order by buildTime desc");
+        return querySql("select * from Manifest order by buildNumber desc");
     }
 
     @Override
     public List<Manifest> queryTop(String buildNumber) throws SQLException {
-        return querySql("select * from Manifest order by buildTime asc limit 6");
+        return querySql("select * from Manifest order by buildNumber desc limit 6");
     }
 
     private List<Manifest> querySql(String sql) throws SQLException{

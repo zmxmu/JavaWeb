@@ -50,49 +50,6 @@
 </head>
 
 <body>
-<div id="container" style="height: 100%"></div>
-
-<script type="text/javascript">
-  var dom = document.getElementById("container");
-  var myChart = echarts.init(dom);
-  var app = {};
-  option = null;
-  var arrBuildNumber = new Array();
-  var arrSize = new Array();
-  var index = 0;
-  <c:forEach items="${buildListTop}" var="bl">
-    arrBuildNumber[index] = ${bl.buildNumber};
-    arrSize[index] = ${bl.size};
-    index++;
-  </c:forEach>
-
-  option = {
-    title: {
-      text: '安装包大小对比图'
-    },
-    tooltip: {
-      show: true
-    },
-    legend: {
-      data:['MB']
-    },
-    xAxis: {
-      type: 'category',
-      data: arrBuildNumber
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [{
-      data: arrSize,
-      type: 'bar'
-    }]
-  };
-  ;
-  if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-  }
-</script>
 <table class="hovertable">
   <tr>
     <th  colspan="6">构建表</th>
@@ -139,5 +96,49 @@
 
   %>
 </table>
+<div id="container" style="height: 100%"></div>
+
+<script type="text/javascript">
+  var dom = document.getElementById("container");
+  var myChart = echarts.init(dom);
+  var app = {};
+  option = null;
+  var arrBuildNumber = new Array();
+  var arrSize = new Array();
+  var index = 0;
+  <c:forEach items="${buildListTop}" var="bl">
+    arrBuildNumber[index] = ${bl.buildNumber};
+    arrSize[index] = ${bl.size};
+    index++;
+  </c:forEach>
+
+  option = {
+    title: {
+      text: '安装包大小对比图(MB)'
+    },
+    tooltip: {
+      show: true
+    },
+    legend: {
+      data:['MB']
+    },
+    xAxis: {
+      type: 'category',
+      data: arrBuildNumber
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      data: arrSize,
+      type: 'bar'
+    }]
+  };
+  ;
+  if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+  }
+</script>
+
 </body>
 </html>

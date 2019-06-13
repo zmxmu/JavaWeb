@@ -26,7 +26,7 @@ public class PNGFileDao implements ApkDao {
             PNGFile item = new PNGFile();
             item.buildNumber = rs.getInt("buildNumber");
             item.entryName = rs.getString("entryName");
-            item.entrySize = rs.getInt("entrySize");
+            item.entrySize = rs.getFloat("entrySize");
             result.add(item);
         }
         return result;

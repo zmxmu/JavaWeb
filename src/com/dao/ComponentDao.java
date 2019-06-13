@@ -25,7 +25,7 @@ public class ComponentDao implements ApkDao {
         while(rs!=null && rs.next()){
             Component item = new Component();
             item.buildNumber = rs.getInt("buildNumber");
-            item.totalSize = rs.getInt("totalSize");
+            item.totalSize = rs.getFloat("totalSize");
             item.suffix = rs.getString("suffix");
             result.add(item);
         }

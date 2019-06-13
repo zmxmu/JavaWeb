@@ -26,7 +26,7 @@ public class BigFileDao implements ApkDao {
             BigFile item = new BigFile();
             item.buildNumber = rs.getInt("buildNumber");
             item.entryName = rs.getString("entryName");
-            item.entrySize = rs.getInt("entrySize");
+            item.entrySize = rs.getFloat("entrySize");
             result.add(item);
         }
         return result;

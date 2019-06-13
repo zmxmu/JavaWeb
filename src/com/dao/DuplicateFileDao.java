@@ -28,7 +28,7 @@ public class DuplicateFileDao implements ApkDao {
             item.buildNumber = rs.getInt("buildNumber");
             item.md5 = rs.getString("md5");
             item.fileSet = rs.getString("fileSet");
-            item.size = rs.getInt("size");
+            item.size = rs.getFloat("size");
             result.add(item);
         }
         return result;
